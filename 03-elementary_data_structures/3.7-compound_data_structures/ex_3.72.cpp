@@ -7,13 +7,12 @@
  * allocate an array of lists, but we stick to a vector and use RAII
  */
 
-
 /*Quick and dirty list implementation*/
 template<typename T>
 struct node{
     T data;
     std::shared_ptr<node> next;
-    node(T d, std::shared_ptr<node<T>> &n):data(d),next(n){}
+    node(T d, const std::shared_ptr<node<T>> &n):data(d),next(n){}
 };
 
 template<typename T>
@@ -30,10 +29,14 @@ int main(int argc, char *argv[])
     int i,j;
     std::vector<link<int>> adj;
     auto v = atoi(argv[1]);
-    adj.resize(v);
+    //From 0 to V inclusive
+    adj.resize(v + 1);
 
     for (int i = 0; i < v; i++)
         adj[i] = nullptr;
+    //This implementation does not eliminate repeated edges. We could use
+    //the linked list implementation for previous sections. Data is inserted
+    //as pairs indicating "from" "to" edges.
     while (std::cin >> i >> j){
         adj[j] = std::make_shared<node<int>>(i,adj[j]);
         adj[i] = std::make_shared<node<int>>(j,adj[i]);

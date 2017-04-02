@@ -11,10 +11,9 @@ int ** malloc2d(int N, int M)
 	return r;
 }
 
-
 int main(int c, char *v[])
 {
-	bool are_coordinates_even = (c-1)%2 == 0 ? true : false;
+	bool are_coordinates_even = (c-1)%2 == 0  && c > 1 ? true : false;
 	if(!are_coordinates_even){
 		std::cout << "Error : please check the amount of coordinates " <<std::endl;
 		return -1;
@@ -54,7 +53,7 @@ int main(int c, char *v[])
 			y = *it;
 		else
 			break;
-		
+
 		adj[x][y] = 1;
 		adj[y][x] = 1;
 		std::advance(it,1);
