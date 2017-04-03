@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <cstdlib>
 
 /*
  * The main purpose of this exercise is : given a pair of vertices a,b.
@@ -37,11 +38,12 @@ void print_matrix(int **adj_matrix, unsigned V)
     }
 }
 
-const std::vector<int> vertexes(int **adj_matrix, vertex ab, unsigned V){
+const std::vector<int> vertexes(int **adj_matrix, const vertex ab, \
+        const unsigned V){
 
     std::vector<int> vertex_c;
     for (int i = 0; i < V; i++){
-        if ( adj_matrix[i][ab.a] && adj_matrix[i][ab.b])
+        if (adj_matrix[i][ab.a] && adj_matrix[i][ab.b])
             vertex_c.push_back(i);
     }
     return vertex_c;
